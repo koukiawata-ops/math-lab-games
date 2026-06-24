@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>平方完成ステップラボ</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+      window.MathJax = {
+        tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] },
+        svg: { fontCache: 'global' },
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  </head>
+  <body>
+    <main class="game-shell">
+      <section class="topbar" aria-label="プレイ状況">
+        <div>
+          <span>Score</span>
+          <strong id="score">0</strong>
+        </div>
+        <div>
+          <span>Time</span>
+          <strong><b id="timeLeft">60</b>s</strong>
+        </div>
+        <div>
+          <span>Life</span>
+          <strong id="life">3</strong>
+        </div>
+        <div>
+          <span>Correct</span>
+          <strong id="correctCount">0</strong>
+        </div>
+      </section>
+
+      <section id="setup" class="setup-panel">
+        <p class="kicker">Completing Square</p>
+        <h1>平方完成ステップラボ</h1>
+        <p class="lead">1分間で、平方完成の空欄をできるだけ多く埋めます。</p>
+        <div class="level-grid" aria-label="難易度">
+          <button class="level-card active" data-level="basic">初級</button>
+          <button class="level-card" data-level="standard">中級</button>
+          <button class="level-card" data-level="advanced">上級</button>
+        </div>
+        <button id="startGame" class="primary">開始</button>
+      </section>
+
+      <section id="playArea" class="play-panel hidden">
+        <div class="question-head">
+          <div>
+            <p class="kicker">Question <span id="questionNo">1</span></p>
+            <div id="questionLatex" class="latex-box">\(x^2+6x+5\)</div>
+          </div>
+          <div class="progress"><span id="progressFill"></span></div>
+        </div>
+
+        <form id="answerForm" class="answer-form">
+          <div id="templateLatex" class="template-latex">\(x^2+6x+5=(x+\square)^2+\square\)</div>
+          <div class="blank-grid">
+            <label>
+              <span id="hLabel">x の中</span>
+              <input id="hInput" type="text" autocomplete="off" inputmode="text" placeholder="例: 3">
+            </label>
+            <label>
+              <span id="kLabel">外の数</span>
+              <input id="kInput" type="text" autocomplete="off" inputmode="text" placeholder="例: -4">
+            </label>
+          </div>
+          <button class="primary" type="submit">判定</button>
+        </form>
+
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+        <div class="hint">
+          <span>入力例</span>
+          <code>3</code>
+          <code>-4</code>
+          <code>5/2</code>
+          <code>-21/4</code>
+        </div>
+      </section>
+
+      <section id="resultPanel" class="result-panel hidden">
+        <p class="kicker">Result</p>
+        <h2 id="resultTitle">結果</h2>
+        <dl class="result-stats">
+          <div><dt>正解</dt><dd id="resultCorrect">0</dd></div>
+          <div><dt>スコア</dt><dd id="resultScore">0</dd></div>
+          <div><dt>残り体力</dt><dd id="resultLife">0</dd></div>
+        </dl>
+        <div class="result-actions">
+          <button id="retry" class="secondary">もう一度</button>
+          <button id="submitResult" class="primary">結果を送信</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="mathlab-game.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>
